@@ -1,15 +1,18 @@
 package com.technews.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "comment")
 public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -63,7 +66,10 @@ public class Comment implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Comment comment)) return false;
-        return Objects.equals(getId(), comment.getId()) && Objects.equals(getCommentText(), comment.getCommentText()) && Objects.equals(getUserId(), comment.getUserId()) && Objects.equals(getPostId(), comment.getPostId());
+        return Objects.equals(getId(), comment.getId()) &&
+                Objects.equals(getCommentText(), comment.getCommentText()) &&
+                Objects.equals(getUserId(), comment.getUserId()) &&
+                Objects.equals(getPostId(), comment.getPostId());
     }
 
     @Override
